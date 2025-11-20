@@ -1,4 +1,4 @@
-package com.franquicias.franquify.adapter.out;
+package com.franquicias.franquify.adapter.out.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,10 +10,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Document(collection = "franchise")
-public class FranchiseEntity {
+@Document(collection = "branch")
+public class BranchEntity {
 
     private String id;
     private String name;
-    private List<BranchEntity> branches;
+    private List<ProductEntity> products;
 }
