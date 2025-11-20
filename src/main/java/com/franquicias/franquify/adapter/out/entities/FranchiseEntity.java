@@ -12,7 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection = "franchise")
-public class FranchiseEntity extends Franchise {
+public class FranchiseEntity {
 
     @Id
     private String id;
