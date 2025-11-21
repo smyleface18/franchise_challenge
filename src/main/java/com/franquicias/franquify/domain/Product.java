@@ -9,12 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Product {
 
-    private String id;
     private String name;
     private int stock;
 
-    public Product(String name, int stock) {
-        this.name = name;
-        this.stock = stock;
-    }
 }

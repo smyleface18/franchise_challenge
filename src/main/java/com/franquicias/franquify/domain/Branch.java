@@ -14,4 +14,8 @@ public class Branch {
     private String id;
     private String name;
     private List<Product> products;
+
+    public void addProduct(Product product) {
+        products.add(product);
+    }
 }

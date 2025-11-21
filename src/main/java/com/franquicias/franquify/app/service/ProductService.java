@@ -9,6 +9,7 @@ import com.franquicias.franquify.app.mappers.ProductDtoMapper;
 import com.franquicias.franquify.app.port.in.ProductUseCase;
 import com.franquicias.franquify.domain.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.resilience.annotation.EnableResilientMethods;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -16,24 +17,23 @@ import reactor.core.publisher.Mono;
 public class ProductService implements ProductUseCase {
 
     private final ProductPersistence repo;
+    private final BranchService branchService;
 
     @Autowired
-    public ProductService(ProductPersistence repo) {
+    public ProductService(BranchService branchService, ProductPersistence repo) {
+        this.branchService = branchService;
         this.repo = repo;
     }
 
 
     @Override
     public Mono<Product> create(CreateProductDto dto) {
-        return this.repo.create(ProductDtoMapper.createDtoToDomain(dto));
+        return null;
     }
 
     @Override
     public Mono<Product> update(UpdateProductDto dto) {
-        return repo.findById(dto.getId())
-                .flatMap(product -> {
-                    product.setName(dto.getName());
-                    return this.repo.update(product);
-                });
+        return null;
     }
+
 }
