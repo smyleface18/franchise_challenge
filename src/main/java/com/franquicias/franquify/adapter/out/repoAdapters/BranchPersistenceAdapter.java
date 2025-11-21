@@ -2,17 +2,18 @@ package com.franquicias.franquify.adapter.out.repoAdapters;
 
 import com.franquicias.franquify.adapter.out.mappers.BranchEntityMapper;
 import com.franquicias.franquify.adapter.out.repositories.BranchRepository;
-import com.franquicias.franquify.adapter.out.repositories.ProductRepository;
 import com.franquicias.franquify.app.port.out.CrudBranchPort;
 import com.franquicias.franquify.domain.Branch;
 import com.franquicias.franquify.domain.exception.EntityNotFoundException;
+import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
-public class BranchPersistence implements CrudBranchPort {
+@Repository
+public class BranchPersistenceAdapter  implements CrudBranchPort {
 
     private final BranchRepository repo;
 
-    public BranchPersistence(BranchRepository repo) {
+    public BranchPersistenceAdapter (BranchRepository repo) {
         this.repo = repo;
     }
 

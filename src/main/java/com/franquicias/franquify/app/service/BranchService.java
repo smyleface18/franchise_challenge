@@ -1,10 +1,11 @@
 package com.franquicias.franquify.app.service;
 
-import com.franquicias.franquify.adapter.out.repoAdapters.BranchPersistence;
+
 import com.franquicias.franquify.app.dtos.branch.ChangeBranchDto;
 import com.franquicias.franquify.app.dtos.product.CreateProductDto;
 import com.franquicias.franquify.app.dtos.product.UpdateProductDto;
 import com.franquicias.franquify.app.port.in.BranchUseCase;
+import com.franquicias.franquify.app.port.out.CrudBranchPort;
 import com.franquicias.franquify.domain.Branch;
 import com.franquicias.franquify.domain.Product;
 import com.franquicias.franquify.domain.exception.EntityNotFoundException;
@@ -18,20 +19,19 @@ import java.util.List;
 @Service
 public class BranchService implements BranchUseCase {
 
-    private final BranchPersistence repo;
+    private final CrudBranchPort persistence;
 
-    @Autowired
-    public BranchService(BranchPersistence repo) {
-        this.repo = repo;
+    public BranchService(CrudBranchPort persistence) {
+        this.persistence = persistence;
     }
 
 
     @Override
     public Mono<Branch> changeName(ChangeBranchDto dto) {
-        return this.repo.findById(dto.getId())
+        return this.persistence.findById(dto.getId())
                 .flatMap(branch -> {
                     branch.setName(dto.getName());
-                    return this.repo.Update(branch);
+                    return this.persistence.Update(branch);
                 });
     }
 
@@ -42,7 +42,7 @@ public class BranchService implements BranchUseCase {
 
     @Override
     public Mono<Branch> addProduct(CreateProductDto dto) {
-        return this.repo.findById(dto.getIdBranch())
+        return this.persistence.findById(dto.getIdBranch())
                 .flatMap(branch -> {
                    boolean exist = existsProductByName(branch.getProducts(), dto.getName());
 
@@ -50,16 +50,16 @@ public class BranchService implements BranchUseCase {
 
                    branch.addProduct(new Product(dto.getName(), dto.getStock()));
 
-                    return this.repo.Update(branch);
+                    return this.persistence.Update(branch);
                 });
     }
 
     @Override
     public Mono<Branch> setStockProduct(UpdateProductDto dto) {
-        return this.repo.findById(dto.getIdBranch())
+        return this.persistence.findById(dto.getIdBranch())
                 .flatMap(branch -> {
                     filterProductByName(branch.getProducts(), dto.getName()).setStock(dto.getStock());
-                    return this.repo.Update(branch);
+                    return this.persistence.Update(branch);
                 });
     }
 
