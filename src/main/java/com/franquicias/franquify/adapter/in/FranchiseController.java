@@ -1,6 +1,7 @@
 package com.franquicias.franquify.adapter.in;
 
 import com.franquicias.franquify.app.dtos.branch.CreateBranchDto;
+import com.franquicias.franquify.app.dtos.franchise.BranchTopProductDto;
 import com.franquicias.franquify.app.dtos.franchise.ChangeFranchiseNameDto;
 import com.franquicias.franquify.app.dtos.franchise.CreateFranchiseDto;
 import com.franquicias.franquify.app.port.in.FranchiseUseCase;
@@ -43,5 +44,9 @@ public class FranchiseController {
     @GetMapping
     public Flux<Franchise> getAll(){
         return franchiseUseCase.getAll();
+    }
+    @GetMapping("/{id}/top-products")
+    public Flux<BranchTopProductDto> getTopProducts(@PathVariable String id) {
+        return this.franchiseUseCase.getTopProductByBranch(id);
     }
 }

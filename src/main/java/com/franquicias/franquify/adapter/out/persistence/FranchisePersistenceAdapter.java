@@ -1,7 +1,5 @@
-package com.franquicias.franquify.adapter.out.repoAdapters;
+package com.franquicias.franquify.adapter.out.persistence;
 
-import com.franquicias.franquify.adapter.out.entities.FranchiseEntity;
-import com.franquicias.franquify.adapter.out.mappers.BranchEntityMapper;
 import com.franquicias.franquify.adapter.out.mappers.FranchiseEntityMapper;
 import com.franquicias.franquify.adapter.out.repositories.BranchRepository;
 import com.franquicias.franquify.adapter.out.repositories.FranchiseRepository;
@@ -10,8 +8,6 @@ import com.franquicias.franquify.domain.Franchise;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.ArrayList;
 
 @Repository
 public class FranchisePersistenceAdapter implements CrudFranchisePort {

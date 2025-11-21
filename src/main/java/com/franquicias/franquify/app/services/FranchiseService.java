@@ -1,6 +1,7 @@
 package com.franquicias.franquify.app.services;
 
 import com.franquicias.franquify.app.dtos.branch.CreateBranchDto;
+import com.franquicias.franquify.app.dtos.franchise.BranchTopProductDto;
 import com.franquicias.franquify.app.dtos.franchise.ChangeFranchiseNameDto;
 import com.franquicias.franquify.app.dtos.franchise.CreateFranchiseDto;
 import com.franquicias.franquify.app.port.in.BranchUseCase;
@@ -8,12 +9,15 @@ import com.franquicias.franquify.app.port.in.FranchiseUseCase;
 import com.franquicias.franquify.app.port.out.CrudFranchisePort;
 import com.franquicias.franquify.domain.Branch;
 import com.franquicias.franquify.domain.Franchise;
+import com.franquicias.franquify.domain.Product;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class FranchiseService implements FranchiseUseCase {
@@ -42,7 +46,6 @@ public class FranchiseService implements FranchiseUseCase {
             return this.persistence.create(franchise);
         });
     }
-
 
     @Override
     public Mono<Franchise> changeName(String idFranchise,ChangeFranchiseNameDto dto) {
@@ -73,4 +76,24 @@ public class FranchiseService implements FranchiseUseCase {
     public Flux<Franchise> getAll() {
         return this.persistence.getAll();
     }
+
+    public Flux<BranchTopProductDto> getTopProductByBranch(String franchiseId) {
+        return this.persistence.findById(franchiseId)
+                .flatMapMany(franchise -> Flux.fromIterable(franchise.getBranchIds()))
+                .flatMap(branchId ->
+                        this.branchUseCase.findById(branchId)
+                                .flatMapMany(branch ->
+                                        this.branchUseCase.findTopProductByStock(branch.getId())
+                                                .map(product -> new BranchTopProductDto(
+                                                        branch.getName(),
+                                                        product.getName(),
+                                                        product.getStock()
+                                                ))
+                                )
+                );
+    }
+
+
+
+
 }

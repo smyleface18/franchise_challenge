@@ -1,6 +1,7 @@
 package com.franquicias.franquify.app.services;
 
 
+import com.franquicias.franquify.adapter.out.entities.ProductEntity;
 import com.franquicias.franquify.app.dtos.branch.CreateBranchDto;
 import com.franquicias.franquify.app.dtos.product.CreateProductDto;
 import com.franquicias.franquify.app.dtos.product.UpdateProductDto;
@@ -37,7 +38,7 @@ public class BranchService implements BranchUseCase {
 
     @Override
     public Mono<Branch> findById(String id) {
-        return null;
+        return this.persistence.findById(id);
     }
 
     @Override
@@ -86,6 +87,11 @@ public class BranchService implements BranchUseCase {
 
                     return this.persistence.Update(branch);
                 });
+    }
+
+    @Override
+    public Mono<Product> findTopProductByStock(String branchId) {
+        return this.persistence.findTopProductByStock(branchId);
     }
 
     private boolean existsProductByName(List<Product> products, String name) {
