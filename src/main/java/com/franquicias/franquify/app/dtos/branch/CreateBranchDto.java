@@ -18,4 +18,8 @@ public class CreateBranchDto {
     private String name;
 
     private List<CreateProductDto> products;
+
+    public CreateBranchDto(String name) {
+        this.name = name;
+    }
 }
