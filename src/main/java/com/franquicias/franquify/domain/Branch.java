@@ -16,7 +16,7 @@ public class Branch {
     private String name;
     private List<Product> products;
 
-    public Branch(String name, String id) {
+    public Branch(String id,String name) {
         this.name = name;
         this.id = id;
     }

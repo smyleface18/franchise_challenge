@@ -1,4 +1,4 @@
-package com.franquicias.franquify.app.service;
+package com.franquicias.franquify.app.services;
 
 import com.franquicias.franquify.app.dtos.branch.CreateBranchDto;
 import com.franquicias.franquify.app.dtos.franchise.ChangeFranchiseNameDto;
@@ -56,8 +56,14 @@ public class FranchiseService implements FranchiseUseCase {
     @Override
     public Mono<Franchise> addBranch(String idFranchise, CreateBranchDto dto) {
         return this.persistence.findById(idFranchise)
-                .flatMap( franchise -> this.branchUseCase.create(dto)
+                .flatMap(franchise -> this.branchUseCase.create(dto)
                         .flatMap(branch -> {
+                            if (franchise.getBranchIds() == null) {
+                                franchise.setBranchIds(new ArrayList<>());
+                            } else {
+                                franchise.setBranchIds(new ArrayList<>(franchise.getBranchIds()));
+                            }
+
                             franchise.getBranchIds().add(branch.getId());
                             return this.persistence.update(franchise);
                         }));

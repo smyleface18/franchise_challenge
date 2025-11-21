@@ -1,7 +1,6 @@
-package com.franquicias.franquify.app.service;
+package com.franquicias.franquify.app.services;
 
 
-import com.franquicias.franquify.app.dtos.branch.ChangeBranchDto;
 import com.franquicias.franquify.app.dtos.branch.CreateBranchDto;
 import com.franquicias.franquify.app.dtos.product.CreateProductDto;
 import com.franquicias.franquify.app.dtos.product.UpdateProductDto;
@@ -12,7 +11,6 @@ import com.franquicias.franquify.domain.Branch;
 import com.franquicias.franquify.domain.Product;
 import com.franquicias.franquify.domain.exception.EntityNotFoundException;
 import com.franquicias.franquify.domain.exception.ProductAlreadyExistsException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 

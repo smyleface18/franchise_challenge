@@ -8,6 +8,7 @@ import com.franquicias.franquify.domain.Product;
 public class ProductDtoMapper {
 
     public static Product createDtoToDomain(CreateProductDto dto) {
+        if (dto == null) return null;
         return new Product(dto.getName(), dto.getStock());
     }
 

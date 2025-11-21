@@ -1,11 +1,10 @@
-package com.franquicias.franquify.app;
+package com.franquicias.franquify.app.services;
 
 import com.franquicias.franquify.app.dtos.branch.CreateBranchDto;
 import com.franquicias.franquify.app.dtos.franchise.ChangeFranchiseNameDto;
 import com.franquicias.franquify.app.dtos.franchise.CreateFranchiseDto;
 import com.franquicias.franquify.app.port.in.BranchUseCase;
 import com.franquicias.franquify.app.port.out.CrudFranchisePort;
-import com.franquicias.franquify.app.service.FranchiseService;
 import com.franquicias.franquify.domain.Branch;
 import com.franquicias.franquify.domain.Franchise;
 import org.junit.jupiter.api.Test;

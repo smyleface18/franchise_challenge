@@ -31,7 +31,7 @@ public class BranchDtoMapper {
 
 
     public static Branch entityToDomainWithoutProducts(Branch branch) {
-        return new Branch(branch.getId(),branch.getName());
+        return new Branch(branch.getId(), branch.getName());
     }
 
 
