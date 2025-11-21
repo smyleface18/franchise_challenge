@@ -1,0 +1,16 @@
+# Ignorar target para no copiar builds viejos
+target/
+*.jar
+*.war
+
+# Ignorar configuraciones locales
+.idea/
+.vscode/
+*.iml
+
+# Ignorar archivos de sistema
+.DS_Store
+*.log
+
+# Ignorar carpetas de dependencias locales de Maven
+.mvn/

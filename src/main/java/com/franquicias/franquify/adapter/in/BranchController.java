@@ -62,4 +62,3 @@ public class BranchController {
         return branchUseCase.changeName(branchId, dto.getName());
     }
 }
-

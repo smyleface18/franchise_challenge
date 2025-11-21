@@ -1,7 +1,7 @@
 package com.franquicias.franquify.app.dtos.branch;
 
-
 import com.franquicias.franquify.app.dtos.product.CreateProductDto;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,8 +14,10 @@ import java.util.List;
 @NoArgsConstructor
 public class CreateBranchDto {
 
+
     @NotEmpty(message = "The branch name cannot be empty.")
     private String name;
+
 
     private List<CreateProductDto> products;
 
