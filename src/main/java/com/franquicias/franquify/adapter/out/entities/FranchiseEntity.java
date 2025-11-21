@@ -18,5 +18,5 @@ public class FranchiseEntity {
     @Id
     private String id;
     private String name;
-    private List<String> brancheIds;
+    private List<String> branchIds;
 }

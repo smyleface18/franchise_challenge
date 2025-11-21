@@ -11,4 +11,27 @@ public class ProductDtoMapper {
         return new Product(dto.getName(), dto.getStock());
     }
 
+    public static  CreateProductDto productEntityToDto(Product product) {
+        if (product == null) {
+            return null;
+        }
+
+        CreateProductDto dto = new CreateProductDto();
+        dto.setName(product.getName());
+        dto.setStock(product.getStock());
+
+        return dto;
+    }
+
+    public static  Product productDtoToEntity(CreateProductDto dto) {
+        if (dto == null) {
+            return null;
+        }
+
+        return new Product(
+                dto.getName(),
+                dto.getStock()
+        );
+    }
+
 }

@@ -28,6 +28,16 @@ public class BranchEntityMapper {
         return branch;
     }
 
+    public static Branch entityToDamain(BranchEntity entity) {
+        if (entity == null) return null;
+
+        Branch branch = new Branch();
+        branch.setId(entity.getId());
+        branch.setName(entity.getName());
+
+        return branch;
+    }
+
     public static BranchEntity domainToEntity(Branch domain) {
         if (domain == null) return null;
 

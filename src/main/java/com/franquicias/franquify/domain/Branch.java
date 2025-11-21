@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -15,7 +16,13 @@ public class Branch {
     private String name;
     private List<Product> products;
 
-    public void addProduct(Product product) {
-        products.add(product);
+    public Branch(String name, String id) {
+        this.name = name;
+        this.id = id;
     }
+
+    public Branch(String name) {
+        this.name = name;
+    }
+
 }
