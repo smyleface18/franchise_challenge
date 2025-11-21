@@ -14,7 +14,10 @@ import java.util.List;
 @NoArgsConstructor
 public class CreateBranchDto {
 
-    @NotEmpty(message = "El nombre de la sucursal no puede estar vacío")
+    @NotEmpty(message = "The Franchise ID cannot be empty.")
+    private String idFranchise;
+
+    @NotEmpty(message = "The branch name cannot be empty.")
     private String name;
 
     private List<CreateProductDto> products;

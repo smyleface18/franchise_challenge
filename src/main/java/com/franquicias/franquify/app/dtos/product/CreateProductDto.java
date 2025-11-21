@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class CreateProductDto {
 
+    @NotEmpty(message = "The branch ID cannot be empty.")
+    private String idBranch;
+
     @NotEmpty(message = "The product name cannot be empty.")
     private String name;
 

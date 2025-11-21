@@ -5,6 +5,7 @@ import com.franquicias.franquify.adapter.out.mappers.ProductEntityMapper;
 import com.franquicias.franquify.adapter.out.repositories.ProductRepository;
 import com.franquicias.franquify.app.port.out.CrudProductPort;
 import com.franquicias.franquify.domain.Product;
+import com.franquicias.franquify.domain.exception.ProductNotFoundException;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Mono;
 
@@ -32,6 +33,7 @@ public class ProductPersistence implements CrudProductPort {
     @Override
     public Mono<Product> findById(String id) {
         return this.repo.findById(id)
-                .map(ProductEntityMapper::entityToDomain);
+                .map(ProductEntityMapper::entityToDomain)
+                .switchIfEmpty(Mono.error(new ProductNotFoundException(id)));
     }
 }
