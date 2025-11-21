@@ -3,15 +3,15 @@ services:
     build: .
     container_name: spring-webflux-app
     ports:
-      - 8081:8080   # Puerto host:contenedor
+      - 8081:8080
     environment:
       - DB_URI=mongodb://root:secret@mongodb:27017/mydatabase?authSource=admin
       - DB_NAME=mydatabase
       - SERVER_PORT=8080
     depends_on:
       - mongodb
-    volumes:
-      - ./target:/app/target   # Mantener jar actualizado para desarrollo
+    networks:
+      - franquify-network
 
   mongodb:
     image: mongo:latest
@@ -22,3 +22,14 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=secret
     ports:
       - 27017:27017
+    volumes:
+      - mongo-data:/data/db
+    networks:
+      - franquify-network
+
+volumes:
+  mongo-data:
+
+networks:
+  franquify-network:
+    driver: bridge

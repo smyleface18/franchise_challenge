@@ -1,15 +1,12 @@
-# Imagen base: JDK para correr la app
-FROM eclipse-temurin:17-jdk-alpine
 
-# Directorio de trabajo
+FROM eclipse-temurin:21-jdk-alpine AS builder
 WORKDIR /app
+COPY . .
+RUN apk add --no-cache maven && mvn clean package -DskipTests
 
-# Copiar el jar compilado
-COPY target/*.jar app.jar
 
-# Exponer puerto interno
+FROM eclipse-temurin:21-jdk-alpine
+WORKDIR /app
+COPY --from=builder /app/target/*.jar app.jar
 EXPOSE 8080
-
-# Comando para iniciar la app
 ENTRYPOINT ["java","-jar","app.jar"]
-
